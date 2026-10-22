@@ -106,7 +106,7 @@ def slot_mapping(block_ids: list[int], start: int, n: int, block_size: int) -> t
 
 def rotate_packed(kv: torch.Tensor, delta: int, inv_freq: torch.Tensor, head_dim: int) -> torch.Tensor:
     """Re-rotate the K half of packed ``[..., T, H, 2*D]`` KV by ``delta`` positions (fp32,
-    cast once). Same math as kvreuse.rope.shift_keys, in vLLM's layout."""
+    cast once). Same math as splice.rope.shift_keys, in vLLM's layout."""
     if delta == 0:
         return kv
     ang = delta * inv_freq.to(device=kv.device, dtype=torch.float32)

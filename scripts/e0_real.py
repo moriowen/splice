@@ -16,12 +16,12 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from kvreuse import locomo
-from kvreuse.device import pick_device
-from kvreuse.forward import ModelView, full_prefill, selective_prefill
-from kvreuse.methods import FullRecompute, Reposition
-from kvreuse.prompt import PromptBuilder
-from kvreuse.store import ChunkStore, assemble
+from splice import locomo
+from splice.device import pick_device
+from splice.forward import ModelView, full_prefill, selective_prefill
+from splice.methods import FullRecompute, Reposition
+from splice.prompt import PromptBuilder
+from splice.store import ChunkStore, assemble
 
 
 def kl(p_logits, q_logits):

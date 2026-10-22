@@ -1,7 +1,7 @@
 #!/bin/bash
 # One-time setup, run on the ICE login node from the project directory:
 #
-#   cd ~/scratch/kvreuse && bash pace/setup.sh
+#   cd ~/scratch/splice && bash pace/setup.sh
 #
 # The default MODEL is an ungated mirror (see env.sh), so no HF token is needed. For the
 # official repo, export HF_TOKEN for an account that accepted the Mistral license.

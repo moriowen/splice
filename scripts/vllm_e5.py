@@ -19,10 +19,10 @@ from vllm import LLM, SamplingParams
 from vllm.config import KVTransferConfig
 from vllm.inputs import TokensPrompt
 
-from kvreuse import locomo
-from kvreuse.connector_logic import StoreIndex, matched_tokens
-from kvreuse.metrics import clean_prediction, score
-from kvreuse.prompt import PromptBuilder
+from splice import locomo
+from splice.connector_logic import StoreIndex, matched_tokens
+from splice.metrics import clean_prediction, score
+from splice.prompt import PromptBuilder
 
 
 def main():
@@ -52,7 +52,7 @@ def main():
         if args.dump_dir:
             extra["dump_dir"] = str(Path(args.dump_dir).resolve())
         kw["kv_transfer_config"] = KVTransferConfig(
-            kv_connector="ChunkReuseConnector", kv_connector_module_path="kvreuse.vllm_connector",
+            kv_connector="ChunkReuseConnector", kv_connector_module_path="splice.vllm_connector",
             kv_role="kv_both", kv_connector_extra_config=extra)
     llm = LLM(model=args.model, dtype="bfloat16", enable_prefix_caching=False, seed=args.seed,
               gpu_memory_utilization=args.gpu_mem, max_model_len=args.max_model_len, **kw)

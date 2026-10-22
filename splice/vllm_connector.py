@@ -7,7 +7,7 @@ the matched chunks' KV is re-rotated to where they land. vLLM then computes only
 
 Register with:
     --kv-transfer-config '{"kv_connector": "ChunkReuseConnector",
-        "kv_connector_module_path": "kvreuse.vllm_connector", "kv_role": "kv_both",
+        "kv_connector_module_path": "splice.vllm_connector", "kv_role": "kv_both",
         "kv_connector_extra_config": {"store_dir": "<dir>"}}'
 Run with prefix caching off (``--no-enable-prefix-caching``): otherwise vLLM registers the
 loaded (approximate) KV in its own prefix cache under exact token hashes.

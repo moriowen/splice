@@ -3,8 +3,8 @@
 # Override any of these by exporting it before submitting.
 set -eo pipefail
 
-PROJECT_DIR="${PROJECT_DIR:-$HOME/scratch/kvreuse}"
-VENV="${VENV:-$HOME/scratch/kvreuse-venv}"
+PROJECT_DIR="${PROJECT_DIR:-$HOME/scratch/splice}"
+VENV="${VENV:-$HOME/scratch/splice-venv}"
 export HF_HOME="${HF_HOME:-$HOME/scratch/hf}"
 export PIP_CACHE_DIR="${PIP_CACHE_DIR:-$HOME/scratch/pip-cache}"
 # Default: ungated mirror of Mistral-7B-Instruct-v0.3. Its three weight shards have the same

@@ -4,12 +4,12 @@ import random
 
 import torch
 
-from kvreuse.connector_logic import (
+from splice.connector_logic import (
     StoreIndex, assemble_packed, matched_tokens, segment_key, slot_mapping, to_packed,
 )
-from kvreuse.forward import full_prefill, selective_prefill
-from kvreuse.methods import RepositionAligned
-from kvreuse.store import ChunkStore, assemble
+from splice.forward import full_prefill, selective_prefill
+from splice.methods import RepositionAligned
+from splice.store import ChunkStore, assemble
 
 CTX = [1, 3]
 
@@ -40,7 +40,7 @@ def test_match_any_order_and_stop_at_question(view, ids):
 
 
 def test_alignment_and_slots():
-    from kvreuse.connector_logic import Segment
+    from splice.connector_logic import Segment
     segs = [Segment("p", 0, 7, 0), Segment("c", 7, 30, 2)]  # covered prefix ends at 37
     assert matched_tokens(segs, n_prompt=50, n_computed=0, block_size=16) == 32
     assert matched_tokens(segs, n_prompt=50, n_computed=16, block_size=16) == 16
@@ -50,7 +50,7 @@ def test_alignment_and_slots():
 
 
 def test_seen_only_stops_at_first_unseen():
-    from kvreuse.connector_logic import Segment, seen_only
+    from splice.connector_logic import Segment, seen_only
     segs = [Segment("p", 0, 7, 0), Segment("a", 7, 30, 2), Segment("b", 37, 30, 2), Segment("c", 67, 30, 2)]
     assert [s.key for s in seen_only(segs, {"p", "a", "c"})] == ["p", "a"]
     assert seen_only(segs, {"a", "b"}) == []  # unseen prefix: no hit at all

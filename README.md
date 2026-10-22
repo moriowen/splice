@@ -119,7 +119,7 @@ small recompute budget is what methods 2 to 4 are for, and E1 measures how well 
 ## Repo layout
 
 ```
-kvreuse/          the package
+splice/          the package
   locomo.py         LoCoMo loading and chunking
   retrieval.py      BM25 / embedding retrieval
   prompt.py         token-ID prompt assembly

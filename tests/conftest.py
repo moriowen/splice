@@ -2,7 +2,7 @@ import pytest
 import torch
 from transformers import MistralConfig, MistralForCausalLM
 
-from kvreuse.forward import ModelView
+from splice.forward import ModelView
 
 
 @pytest.fixture(scope="session")

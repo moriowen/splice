@@ -14,7 +14,7 @@ import json
 import statistics
 from pathlib import Path
 
-from kvreuse.metrics import paired_bootstrap
+from splice.metrics import paired_bootstrap
 
 CATS = (1, 2, 3, 4)
 

@@ -13,8 +13,8 @@
 #   4. compare
 source pace/env.sh
 N="${N:-100}"
-STORE="${STORE:-$HOME/scratch/kvreuse-store-conv26}"
-VLLM_VENV="${VLLM_VENV:-$HOME/scratch/kvreuse-vllm-venv312}"
+STORE="${STORE:-$HOME/scratch/splice-store-conv26}"
+VLLM_VENV="${VLLM_VENV:-$HOME/scratch/splice-vllm-venv312}"
 nvidia-smi --query-gpu=name,memory.total --format=csv
 
 [ -f "$STORE/meta.json" ] || python scripts/export_store.py --model "$MODEL" --samples conv-26 --out "$STORE"

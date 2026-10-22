@@ -12,9 +12,9 @@ from pathlib import Path
 
 from transformers import AutoTokenizer
 
-from kvreuse import locomo
-from kvreuse.prompt import PromptBuilder
-from kvreuse.retrieval import BM25Retriever, EmbeddingRetriever
+from splice import locomo
+from splice.prompt import PromptBuilder
+from splice.retrieval import BM25Retriever, EmbeddingRetriever
 
 
 def main():

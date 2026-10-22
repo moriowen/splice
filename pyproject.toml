@@ -1,5 +1,5 @@
 [project]
-name = "kvreuse"
+name = "splice"
 version = "0.1.0"
 description = "Non-prefix KV reuse for agent memory"
 requires-python = ">=3.10"
@@ -16,7 +16,7 @@ dev = ["pytest", "matplotlib"]  # matplotlib only for scripts/plot_e1.py
 embed = ["sentence-transformers"]  # only for prepare_data.py --retriever embed
 
 [tool.setuptools]
-packages = ["kvreuse"]
+packages = ["splice"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

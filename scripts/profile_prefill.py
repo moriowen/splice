@@ -16,12 +16,12 @@ import torch
 from torch.profiler import ProfilerActivity, profile
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from kvreuse import forward, locomo
-from kvreuse.device import pick_device
-from kvreuse.forward import ModelView, full_prefill, selective_prefill
-from kvreuse.methods import Reposition
-from kvreuse.prompt import PromptBuilder
-from kvreuse.store import ChunkStore, assemble
+from splice import forward, locomo
+from splice.device import pick_device
+from splice.forward import ModelView, full_prefill, selective_prefill
+from splice.methods import Reposition
+from splice.prompt import PromptBuilder
+from splice.store import ChunkStore, assemble
 
 
 def cuda_ms(fn, iters):

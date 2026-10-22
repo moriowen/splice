@@ -28,13 +28,13 @@ import torch.nn.functional as F
 import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from kvreuse import locomo
-from kvreuse.device import pick_device
-from kvreuse.forward import ModelView, full_prefill, greedy_decode, selective_prefill
-from kvreuse.methods import make_plan
-from kvreuse.metrics import clean_prediction, score
-from kvreuse.prompt import PromptBuilder
-from kvreuse.store import ChunkStore, assemble
+from splice import locomo
+from splice.device import pick_device
+from splice.forward import ModelView, full_prefill, greedy_decode, selective_prefill
+from splice.methods import make_plan
+from splice.metrics import clean_prediction, score
+from splice.prompt import PromptBuilder
+from splice.store import ChunkStore, assemble
 
 DTYPES = {"bf16": torch.bfloat16, "fp32": torch.float32, "fp16": torch.float16}
 

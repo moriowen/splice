@@ -2,7 +2,7 @@
 
 import pytest
 
-from kvreuse.workload import reuse_rate, zipf_stream
+from splice.workload import reuse_rate, zipf_stream
 
 POOL = [f"c{i}" for i in range(1300)]
 

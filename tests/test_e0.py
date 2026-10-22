@@ -3,10 +3,10 @@
 import pytest
 import torch
 
-from kvreuse.forward import full_prefill, selective_prefill
-from kvreuse.methods import EPIC, AgentKVShift, CacheBlend, FullRecompute, Reposition
-from kvreuse.rope import shift_keys
-from kvreuse.store import ChunkStore, assemble
+from splice.forward import full_prefill, selective_prefill
+from splice.methods import EPIC, AgentKVShift, CacheBlend, FullRecompute, Reposition
+from splice.rope import shift_keys
+from splice.store import ChunkStore, assemble
 
 ATOL = 1e-5
 

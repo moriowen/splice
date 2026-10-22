@@ -1,5 +1,5 @@
 """Write the C3 chunk store: KV of every chunk and system prefix, computed by the Transformers
-path and saved in vLLM's packed layout (see kvreuse/connector_logic.py for the format).
+path and saved in vLLM's packed layout (see splice/connector_logic.py for the format).
 
     python scripts/export_store.py --out store/ --samples conv-26      # one conversation (~2.8 GB)
     python scripts/export_store.py --out store/                         # all ten (~35 GB)
@@ -16,12 +16,12 @@ import torch
 from safetensors.torch import save_file
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from kvreuse import locomo
-from kvreuse.connector_logic import segment_key, to_packed
-from kvreuse.device import pick_device
-from kvreuse.forward import ModelView
-from kvreuse.prompt import PromptBuilder
-from kvreuse.store import ChunkStore
+from splice import locomo
+from splice.connector_logic import segment_key, to_packed
+from splice.device import pick_device
+from splice.forward import ModelView
+from splice.prompt import PromptBuilder
+from splice.store import ChunkStore
 
 
 def main():

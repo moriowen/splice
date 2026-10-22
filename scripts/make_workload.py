@@ -12,8 +12,8 @@ from pathlib import Path
 
 from transformers import AutoTokenizer
 
-from kvreuse.prompt import PromptBuilder
-from kvreuse.workload import locomo_requests, reuse_rate, zipf_requests
+from splice.prompt import PromptBuilder
+from splice.workload import locomo_requests, reuse_rate, zipf_requests
 
 
 def main():

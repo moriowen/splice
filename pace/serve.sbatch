@@ -16,8 +16,8 @@
 #   sbatch --array=0-2 --export=ALL,MODE=e4 pace/serve.sbatch
 #   sbatch --array=0-2 --export=ALL,MODE=e3,REPS=1,LIMIT=20,WORKLOADS=work/e3_k10.jsonl pace/serve.sbatch  # smoke
 source pace/env.sh
-set +u; deactivate 2>/dev/null || true; source "${VLLM_VENV:-$HOME/scratch/kvreuse-vllm-venv312}/bin/activate"; set -u
-export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"  # this copy's kvreuse, whatever -e install the venv has
+set +u; deactivate 2>/dev/null || true; source "${VLLM_VENV:-$HOME/scratch/splice-vllm-venv312}/bin/activate"; set -u
+export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"  # this copy's splice, whatever -e install the venv has
 
 MODE="${MODE:-e3}"
 CONFIGS=(full prefix connector)
@@ -27,11 +27,11 @@ PORT=$(( 20000 + SLURM_JOB_ID % 20000 ))  # unique per array task; two jobs can 
 export VLLM_ENGINE_READY_TIMEOUT_S=1800  # the connector preloads the store during engine start-up
 LIMIT_ARG=${LIMIT:+--limit $LIMIT}
 if [ "$MODE" = e3 ]; then
-    STORE="${STORE:-$HOME/scratch/kvreuse-store-conv26}"
+    STORE="${STORE:-$HOME/scratch/splice-store-conv26}"
     WORKLOADS="${WORKLOADS:-work/e3_k2.jsonl work/e3_k4.jsonl work/e3_k6.jsonl work/e3_k8.jsonl work/e3_k10.jsonl}"
     CONC="${CONC:-1}"; SEEN=false
 else
-    STORE="${STORE:-$HOME/scratch/kvreuse-store-all}"
+    STORE="${STORE:-$HOME/scratch/splice-store-all}"
     WORKLOADS="${WORKLOADS:-work/e4_p0.jsonl work/e4_p0.25.jsonl work/e4_p0.5.jsonl work/e4_p0.75.jsonl work/e4_p0.9.jsonl}"
     CONC="${CONC:-16}"; SEEN=true
 fi
@@ -39,7 +39,7 @@ fi
 if [ "$CONFIG" = connector ]; then
     # Stage the store in node-local memory once per job: preloading 33 GB cold from Lustre
     # takes >10 min per server start, from /dev/shm it is memory speed.
-    STAGE="/dev/shm/kvreuse-store-$SLURM_JOB_ID"
+    STAGE="/dev/shm/splice-store-$SLURM_JOB_ID"
     trap 'rm -rf "$STAGE"' EXIT
     mkdir -p "$STAGE"
     t0=$(date +%s)
@@ -55,7 +55,7 @@ case "$CONFIG" in
     prefix) FLAGS+=(--enable-prefix-caching) ;;
     connector)
         FLAGS+=(--no-enable-prefix-caching --kv-transfer-config "{\"kv_connector\": \"ChunkReuseConnector\",
-            \"kv_connector_module_path\": \"kvreuse.vllm_connector\", \"kv_role\": \"kv_both\",
+            \"kv_connector_module_path\": \"splice.vllm_connector\", \"kv_role\": \"kv_both\",
             \"kv_connector_extra_config\": {\"store_dir\": \"$STORE\", \"kv_device\": \"cpu\",
             \"preload\": true, \"require_seen\": $SEEN, \"profile\": ${PROFILE:-false}}}") ;;
 esac

@@ -1,8 +1,8 @@
 import pytest
 
-from kvreuse import locomo
-from kvreuse.metrics import paired_bootstrap, score
-from kvreuse.retrieval import BM25Retriever
+from splice import locomo
+from splice.metrics import paired_bootstrap, score
+from splice.retrieval import BM25Retriever
 
 
 def _sample():
